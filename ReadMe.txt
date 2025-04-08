@@ -2,6 +2,10 @@ https://github.com/okovtun/PD_321_Java
 https://www.youtube.com/playlist?list=PLeqyOOqxeiIPrsaAGgON8qCROi-WTThsS
 
 TODO:
+1. Выполнить скалярный запрос, который подсчитывает количество записей в таблице;
+2. Добавить запись в Базу;
+
+DONE:
 Подключиться к Базе, и попробовать выполнить запрос.
 
 DONE:
