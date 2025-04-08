@@ -2,6 +2,9 @@ https://github.com/okovtun/PD_321_Java
 https://www.youtube.com/playlist?list=PLeqyOOqxeiIPrsaAGgON8qCROi-WTThsS
 
 TODO:
+Подключиться к Базе, и попробовать выполнить запрос.
+
+DONE:
 1. Записать группу в файл;
 2. Загрузить группу из файла;
 
