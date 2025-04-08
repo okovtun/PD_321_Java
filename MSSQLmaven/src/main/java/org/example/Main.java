@@ -20,7 +20,18 @@ public class Main {
                         "password=111;"+
                         "Connect Timeout=30;Encrypt=True;" +
                         "TrustServerCertificate=True;";
-        try
+        Connector connector = new Connector(connectionString);
+        String query =
+                "SELECT " +
+                        "FORMATMESSAGE(N'%s %s %s',last_name,first_name,middle_name) AS N'Студент', " +
+                        "group_name," +
+                        "direction_name " +
+                        "FROM Students JOIN Groups ON ([group]=group_id) JOIN Directions ON (direction=direction_id)";
+        connector.Select(query);
+        String scalarQuery = "SELECT COUNT(*) FROM Students";
+        //System.out.println(connector.Scalar(scalarQuery));
+        connector.Select("SELECT * FROM Directions");
+        /*try
         {
             Connection connection = DriverManager.getConnection(connectionString);  //Создает соединение
 
@@ -39,6 +50,6 @@ public class Main {
         catch (SQLException e)
         {
             e.printStackTrace();
-        }
+        }*/
     }
     }
