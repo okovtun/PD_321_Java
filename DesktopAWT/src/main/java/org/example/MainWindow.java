@@ -2,6 +2,8 @@ package org.example;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class MainWindow extends Frame {
     Label lblLastName   = new Label("Last  name: ");
@@ -51,6 +53,43 @@ public class MainWindow extends Frame {
         this.add(results);
 
         btnSubmit.addActionListener(this::btnSubmitHandler);
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
+
 
         GridLayout grid = new GridLayout(5,2,10,30);
         this.setLayout(grid);
@@ -60,5 +99,10 @@ public class MainWindow extends Frame {
     {
         String results = textLastName.getText() + " " + textFirstName.getText() + " " + textBirthDate.getText();
         this.results.setText(results);
+    }
+    public void closeWindowHandler(ActionEvent e)
+    {
+        MainWindow mainWindow = this;
+        mainWindow.dispose();
     }
 }
