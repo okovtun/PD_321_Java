@@ -2,6 +2,10 @@ https://github.com/okovtun/PD_321_Java
 https://www.youtube.com/playlist?list=PLeqyOOqxeiIPrsaAGgON8qCROi-WTThsS
 
 TODO:
+1. В AWT-приложение добавить выпадающий список, и загрузить туда любую таблицу из Базы;
+2. Запустить JavaFX-прилодение;
+
+DONE:
 Подключиться к Базе, и попробовать выполнить запрос.
 
 DONE:
