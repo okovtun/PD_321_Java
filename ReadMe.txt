@@ -2,6 +2,10 @@ https://github.com/okovtun/PD_321_Java
 https://www.youtube.com/playlist?list=PLeqyOOqxeiIPrsaAGgON8qCROi-WTThsS
 
 TODO:
+1. Отобразить любую таблицу из Базы в окне AcademyFX;
+2. Прикрутить TabControl с разделами Students,Groups,Teachers и т.д.
+
+DONE:
 1. Выполнить скалярный запрос, который подсчитывает количество записей в таблице;
 2. Добавить запись в Базу;
 
