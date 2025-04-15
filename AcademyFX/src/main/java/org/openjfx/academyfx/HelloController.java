@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class HelloController {
+    private Connector connector = null;
+    @FXML
+    private Label labelStatus;
     /*@FXML
     private TextField lastName;
     @FXML
@@ -75,39 +78,94 @@ public class HelloController {
         alert.show();
     }
     @FXML
-    protected void loadDirections()throws SQLException
+    protected void loadDirections()throws SQLException, Exception
     {
-        String connectionString =
+        /*String connectionString =
                 "jdbc:sqlserver://localhost:1433;" +
                         "database=PD_212;"+
                         "user=PHP;"+
                         "password=111;"+
                         "Connect Timeout=10;" +
                         "TrustServerCertificate=True";
-        Connection connection = DriverManager.getConnection(connectionString);
-        Statement statement = connection.createStatement();
+        Connection connection = DriverManager.getConnection(connectionString);*/
+        try {
+            Statement statement = connector.getConnection().createStatement();
 
-        ResultSet set = statement.executeQuery("SELECT * FROM Directions");
-        for(int i=0; i<set.getMetaData().getColumnCount();i++)
-        {
-            TableColumn<String[], String> column = new TableColumn<>(set.getMetaData().getColumnLabel(i+1));
-            tableDirections.getColumns().add(column);
-            final int j = i;
-            column.setCellValueFactory(data->new SimpleStringProperty(data.getValue()[j]));
-        }
-
-        while (set.next())
-        {
-            Collection<String> list = new ArrayList<>();
-            for(int i=1; i<=set.getMetaData().getColumnCount();i++)
+            ResultSet set = statement.executeQuery("SELECT * FROM Directions");
+            for(int i=0; i<set.getMetaData().getColumnCount();i++)
             {
-                list.add(set.getString(i));
+                TableColumn<String[], String> column = new TableColumn<>(set.getMetaData().getColumnLabel(i+1));
+                tableDirections.getColumns().add(column);
+                final int j = i;
+                column.setCellValueFactory(data->new SimpleStringProperty(data.getValue()[j]));
             }
-            String[] arr = new String[list.size()];
-            list.toArray(arr);
-            tableDirections.getItems().addAll(arr);
-        }
 
-        connection.close();
+            while (set.next())
+            {
+                Collection<String> list = new ArrayList<>();
+                for(int i=1; i<=set.getMetaData().getColumnCount();i++)
+                {
+                    list.add(set.getString(i));
+                }
+                String[] arr = new String[list.size()];
+                list.toArray(arr);
+                tableDirections.getItems().addAll(arr);
+            }
+
+            //connection.close();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    protected void connect()
+    {
+        if(connector == null)
+        {
+            String connectionString = "jdbc:sqlserver://localhost:1433;"
+                + "database=PD_212;"
+                + "user=PHP;"
+                + "password=111;"
+                + "ConnectTimeout=30;"
+                + "Encrypt=True;"
+                + "TrustServerCertificate=True;"
+                + "ApplicationIntent=ReadWrite;"
+                + "MultiSubnetFailover=False;";
+            try
+            {
+                connector = new Connector(connectionString);
+                labelStatus.setText("Connected\n" + connector.getConnection().toString());
+            }
+            catch (SQLException e)
+            {
+                Alert error = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+                error.showAndWait();
+            }
+        }
+        else
+        {
+            Alert error = new Alert(Alert.AlertType.ERROR, "Connection already established", ButtonType.OK);
+            error.show();
+        }
+    }
+    @FXML
+    protected void disconnect()
+    {
+        if(connector != null)
+        {
+            try
+            {
+                connector.closeConnection();
+                //TODO: clear all data
+                connector = null;
+                labelStatus.setText("Disconnected");
+            }
+            catch (SQLException e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
     }
 }
