@@ -19,6 +19,8 @@ public class HelloController {
     @FXML
     private Tab tabDirections;
     @FXML
+    private Tab tabHumans;
+    @FXML
     private TextField textFieldStatus;
 
     @FXML
@@ -44,5 +46,13 @@ public class HelloController {
             tabDirections.setContent(fxmlLoader.load());
         }
     }
-
+    @FXML
+    protected void onTabHumansSelected()throws IOException
+    {
+        if(tabHumans.isSelected())
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("View/human-view.fxml"));
+            tabHumans.setContent(fxmlLoader.load());
+        }
+    }
 }

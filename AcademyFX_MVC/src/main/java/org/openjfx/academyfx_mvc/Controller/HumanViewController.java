@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.openjfx.academyfx_mvc.Connector;
+import org.openjfx.academyfx_mvc.Model.Human;
 import org.openjfx.academyfx_mvc.Model.Student;
 
 import java.sql.ResultSet;
@@ -13,24 +14,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-public class StudentViewController
-{
+public class HumanViewController {
     @FXML
-    private TableView<Student> tableStudents;
+    private TableView<Human> tableHumans;
     @FXML
-    private TableColumn<Student, Integer> id;
+    private TableColumn<Human, Integer> id;
     @FXML
-    private TableColumn<Student, String> lastName;
+    private TableColumn<Human, String> lastName;
     @FXML
-    private TableColumn<Student, String> firstName;
+    private TableColumn<Human, String> firstName;
     @FXML
-    private TableColumn<Student, String> middleName;
+    private TableColumn<Human, String> middleName;
     @FXML
-    private TableColumn<Student, Date> birthDate;
-    @FXML
-    private TableColumn<Student, Integer> group;
+    private TableColumn<Human, Date> birthDate;
 
-    private final ObservableList<Student> list = FXCollections.observableArrayList();
+    private final ObservableList<Human> list = FXCollections.observableArrayList();
 
     @FXML
     private void initialize()
@@ -41,11 +39,10 @@ public class StudentViewController
             firstName.setCellValueFactory(data -> data.getValue().firstNameProperty());
             middleName.setCellValueFactory(data -> data.getValue().middleNameProperty());
             birthDate.setCellValueFactory(data -> data.getValue().birthDateProperty());
-            group.setCellValueFactory(data -> data.getValue().groupProperty().asObject());
             Statement statement = Connector.getConnection().createStatement();
-            ResultSet set = statement.executeQuery("SELECT * FROM Students");
-            while(set.next()) list.add(new Student(set.getInt(1), set.getString(2), set.getString(3), set.getString(4), (Date) set.getObject(5), set.getInt(6)));
-            tableStudents.setItems(list);
+            ResultSet set = statement.executeQuery("SELECT * FROM Students,Teachers");
+            while(set.next()) list.add(new Human(set.getInt(1), set.getString(2), set.getString(3), set.getString(4), (Date) set.getObject(5)));
+            tableHumans.setItems(list);
             set.close();
             statement.close();
         } catch (SQLException e) {
