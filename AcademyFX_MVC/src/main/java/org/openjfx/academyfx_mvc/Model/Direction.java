@@ -6,36 +6,36 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Direction {
-    private final IntegerProperty direction_id;
-    private final StringProperty direction_name;
+    private final IntegerProperty directionId;
+    private final StringProperty directionName;
 
     public Direction(Integer direction_id, String direction_name) {
-        this.direction_id = new SimpleIntegerProperty(direction_id);
-        this.direction_name = new SimpleStringProperty(direction_name);
+        this.directionId = new SimpleIntegerProperty(direction_id);
+        this.directionName = new SimpleStringProperty(direction_name);
     }
 
     public IntegerProperty directionIdProperty() {
-        return direction_id;
+        return directionId;
     }
     public final Integer getDirectionId()
     {
-        return direction_id.get();
+        return directionId.get();
     }
-    public final void setDirectionId(Integer direction_id)
+    public final void setDirectionId(Integer directionId)
     {
-        this.direction_id.set(direction_id);
+        this.directionId.set(directionId);
     }
 
     public StringProperty directionNameProperty()
     {
-        return direction_name;
+        return directionName;
     }
     public final String getDirectionName()
     {
-        return direction_name.get();
+        return directionName.get();
     }
     public final void setDirectionName(String direction_name)
     {
-        this.direction_name.set(direction_name);
+        this.directionName.set(direction_name);
     }
 }
