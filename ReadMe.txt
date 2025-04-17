@@ -1,6 +1,9 @@
 https://github.com/okovtun/PD_321_Java
 https://www.youtube.com/playlist?list=PLeqyOOqxeiIPrsaAGgON8qCROi-WTThsS
 
+JavaFX:
+https://tdp-2023.github.io/materiale/slide/02-02-javafx-mvc-pattern.pdf
+
 TODO:
 1. Если соединение неустановлено, и пользователь пытается открыть вкладку,
    перевести пользователя на установку соединения (программа не должна падать);
