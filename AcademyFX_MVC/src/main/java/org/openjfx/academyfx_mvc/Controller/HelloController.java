@@ -53,6 +53,8 @@ public class HelloController {
         {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("View/human-view.fxml"));
             tabHumans.setContent(fxmlLoader.load());
+            HumanViewController controller = fxmlLoader.getController();
+
         }
     }
 }

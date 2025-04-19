@@ -28,17 +28,21 @@ public class HumanViewController {
     @FXML
     private TableColumn<Human, Date> birthDate;
 
-    private final ObservableList<Human> list = FXCollections.observableArrayList();
+    protected final ObservableList<Human> list = FXCollections.observableArrayList();
 
     @FXML
     private void initialize()
     {
-        try {
-            id.setCellValueFactory(data -> data.getValue().idProperty().asObject());
-            lastName.setCellValueFactory(data -> data.getValue().lastNameProperty());
-            firstName.setCellValueFactory(data -> data.getValue().firstNameProperty());
-            middleName.setCellValueFactory(data -> data.getValue().middleNameProperty());
-            birthDate.setCellValueFactory(data -> data.getValue().birthDateProperty());
+        id.setCellValueFactory(data -> data.getValue().idProperty().asObject());
+        lastName.setCellValueFactory(data -> data.getValue().lastNameProperty());
+        firstName.setCellValueFactory(data -> data.getValue().firstNameProperty());
+        middleName.setCellValueFactory(data -> data.getValue().middleNameProperty());
+        birthDate.setCellValueFactory(data -> data.getValue().birthDateProperty());
+        load();
+    }
+    protected void load()
+    {
+        try{
             Statement statement = Connector.getConnection().createStatement();
             ResultSet set = statement.executeQuery("SELECT * FROM Students,Teachers");
             while(set.next()) list.add(new Human(set.getInt(1), set.getString(2), set.getString(3), set.getString(4), (Date) set.getObject(5)));
