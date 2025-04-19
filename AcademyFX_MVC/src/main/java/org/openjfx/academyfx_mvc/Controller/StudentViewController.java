@@ -1,7 +1,5 @@
 package org.openjfx.academyfx_mvc.Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -36,12 +34,13 @@ public class StudentViewController extends HumanViewController
     //private final ObservableList<Student> list = FXCollections.observableArrayList();
 
     @FXML
-    private void initialize()
+    protected void initialize()
     {
+        super.initialize();
         group.setCellValueFactory(data -> data.getValue().groupProperty().asObject());
-        load();
+        //getDataFromBase();
     }
-    protected void load()
+    public void getDataFromBase()
     {
         try {
             /*id.setCellValueFactory(data -> data.getValue().idProperty().asObject());
@@ -50,7 +49,7 @@ public class StudentViewController extends HumanViewController
             middleName.setCellValueFactory(data -> data.getValue().middleNameProperty());
             birthDate.setCellValueFactory(data -> data.getValue().birthDateProperty());*/
 
-            super.load();
+            //super.getDataFromBase();
             Statement statement = Connector.getConnection().createStatement();
             ResultSet set = statement.executeQuery("SELECT * FROM Students");
             while(set.next()) list.add(new Student(set.getInt(1), set.getString(2), set.getString(3), set.getString(4), (Date) set.getObject(5), set.getInt(6)));

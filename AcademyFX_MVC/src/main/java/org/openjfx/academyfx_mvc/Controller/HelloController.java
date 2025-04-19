@@ -35,6 +35,8 @@ public class HelloController {
         {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("View/student-view.fxml"));
             tabStudents.setContent(fxmlLoader.load());
+            StudentViewController controller = fxmlLoader.getController();
+            controller.getDataFromBase();
         }
     }
     @FXML
@@ -54,7 +56,7 @@ public class HelloController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("View/human-view.fxml"));
             tabHumans.setContent(fxmlLoader.load());
             HumanViewController controller = fxmlLoader.getController();
-
+            controller.getDataFromBase();
         }
     }
 }
